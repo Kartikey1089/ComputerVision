@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-# Define color ranges in HSV
+# Define your color ranges in HSV, I have defined the basic colors
 color_ranges = {
     'black': ([0, 0, 0], [180, 255, 50]),
     'blue': ([100, 150, 0], [140, 255, 255]),
@@ -10,7 +10,6 @@ color_ranges = {
     'red2': ([170, 120, 70], [180, 255, 255])
 }
 
-# Start video capture
 cap = cv2.VideoCapture(0)
 
 while True:
@@ -27,7 +26,7 @@ while True:
         for cnt in contours:
             area = cv2.contourArea(cnt)
             if area > 500:
-                # Draw rectangle around the detected object
+                
                 x, y, w, h = cv2.boundingRect(cnt)
                 cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
@@ -36,7 +35,7 @@ while True:
                 else:
                     detected_colors.append(color)
     
-    detected_colors = list(set(detected_colors))  # Remove duplicates
+    detected_colors = list(set(detected_colors))  
     print(f"Detected colors: {', '.join(detected_colors)}")
 
     cv2.imshow('frame', frame)
